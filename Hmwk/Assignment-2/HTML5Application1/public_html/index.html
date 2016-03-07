@@ -11,6 +11,25 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <script>
+            // Declare Variables
+            var hrsWrkd=50;//Hours worked in hrs
+            var payRate=10;//pay rate in $/hr
+            var payChk;
+            
+            if (hrsWrkd > 40){
+                payChk = (hrsWrkd-40)*(payRate*3)+(20*(payRate*2))+(20*payRate);
+            }else if(hrsWrkd > 20){
+                payChk = (hrsWrkd-20)*(payRate*2)+(20*payRate);
+            }else{
+                payChk = hrsWrkd*payRate;
+            }
+            
+            var str="<h1>Hours Worked = "+hrsWrkd+"</h1>";
+            str+="<h1>Pay Rate = $"+payRate+"'s/hr</h1>";
+            str+="<h1>Pay Check = $"+payChk+"</h1>";
+            document.write(str);
+        </script>
         <div>TODO write content</div>
     </body>
 </html>
