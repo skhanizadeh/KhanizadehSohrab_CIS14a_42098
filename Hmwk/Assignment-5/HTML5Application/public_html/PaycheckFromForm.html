@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>sss</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="generator" content="CSE HTML Validator (https://www.htmlvalidator.com/)">
+</head>
+
+<body>
+	<script>
+        //Take the URL in the Window
+        var url=window.location.href;
+        //Split the URL and the important information is in the 2nd half
+        var info=url.split("?");
+        //Place name value pairs into an array
+        var nameValuePairs=info[1].split("&");
+        object=new Object();
+        for(var i=0;i<nameValuePairs.length;i++){
+            var map=nameValuePairs[i].toString().split("=");
+            var name =map[0];
+            var value=map[1];
+            object[name]=value;
+        }
+		//Declare Variables
+		var str="";
+		for(var name in object){
+     	str+=("<h2>"+name+"="+object[name]+"</h2>");
+	
+     	}
+     var hours=object['hours'];
+     var PayRate=object['PayRate'];
+	 var tax=0.1;
+     
+//Declare variables
+			
+			//Perform Calculation / Call the function
+			//var fv1=save1(pv,ir,number);
+			//var fv2=save2(pv,int,nYears);
+			//var fv3=save3(pv,int,nYears);
+			//var fv4=save4(pv,int,nYears);
+			//var fv5=save5(pv,int,nYears);
+
+			
+			//Display the results
+			document.write("<p>Hours to calculate   = "+hours+"</p>");
+			document.write("<p>Pay Rate in $/hour   =  "+PayRate+"$</p>");
+			document.write("<p>Tax =  "+tax*100+"%</p>");
+	var NROWS=hours,NCOLS=5;
+	var twoD=[];
+	for(var rows=0;rows<NROWS;rows++){
+		twoD[rows]=[];
+	}
+	//Fill the array
+	for(var rows=0;rows<NROWS;rows++)
+	{
+		for(var cols=0;cols<NCOLS;cols++)
+		{
+             if(cols==0)
+             {
+                         twoD[rows][cols]=(rows+1);
+             }else if(cols==1)
+             {
+                   if(rows<20)
+                   {
+                   twoD[rows][cols]=(rows+1)*PayRate;
+                   }else if(rows<40)
+                   {
+                   twoD[rows][cols]=((rows-19)*(2*PayRate))+(20*PayRate);
+                   }else
+                   {
+                   twoD[rows][cols]=((rows-39)*(3*PayRate))+(60*PayRate);
+                   }
+             }else if(cols==2)
+             {
+                   if(rows<20)
+                   {
+                   twoD[rows][cols]=PayRate;
+                   }else if(rows<40)
+                   {
+                   twoD[rows][cols]=(2*PayRate);
+                   }else{
+                   twoD[rows][cols]=(3*PayRate);
+                   }
+             }else if(cols==3)
+             {
+             twoD[rows][cols]=(twoD[rows][cols-2])*tax;
+             }else{
+             twoD[rows][cols]=(twoD[rows][cols-3])-(twoD[rows][cols-1]);}
+		}
+	}
+	//Display the table
+	var str="";
+		str='<table border="1" style="width:auto">';
+		str+="<tr><th>Hours</th><th>Gross Pay $</th><th>Pay Rate $/hour</th><th>Tax</th><th>Net Pay $</th></tr>";
+  for(var rows=0;rows<NROWS;rows++){
+          str+="<tr>";
+  		for(var cols=0;cols<NCOLS;cols++){
+  			str+=("<td>"+twoD[rows][cols]+"</td>");
+  		}
+  		str+="</tr>";
+  	}
+    
+	str+="</table>";
+	document.write(str);
+   </script>
+		
+</body>
+</html>
